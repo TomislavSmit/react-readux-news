@@ -1,1 +1,3 @@
 export const FETCH_NEWS = 'FETCH_NEWS';
+export const SELECT_NEWS_ITEM = 'SELECT_NEWS_ITEM';
+export const SELECT_COUNTRY = 'SELECT_COUNTRY';

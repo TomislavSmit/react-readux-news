@@ -10,21 +10,21 @@ const AppRouter = () => {
     <Switch>
       <Route
         exact
-        path="/"
+        path='/'
         render={() => {
-          return <Redirect to="/top-news" />;
+          return <Redirect to='/top-news' />;
         }}
       />
-      <Route path="/top-news" exact>
+      <Route path='/top-news' exact>
         <NewsList />
       </Route>
-      <Route path="/top-news/:id">
+      <Route path='/news-detail'>
         <NewsDetail />
       </Route>
-      <Route path="/categories">
+      <Route path='/categories'>
         <CategoriesList />
       </Route>
-      <Route path="/search">
+      <Route path='/search'>
         <Search />
       </Route>
     </Switch>

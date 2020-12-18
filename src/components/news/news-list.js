@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchNews } from '../../actions';
 
+import Spinner from '../common/Spinner';
+import NewsCard from './news-card';
+
 class NewsList extends React.Component {
   componentDidMount() {
     this.props.fetchNews();
@@ -10,20 +13,22 @@ class NewsList extends React.Component {
   renderList() {
     return this.props.news.map((newsItem) => {
       return (
-        <div className="item" key={newsItem.publishedAt}>
-          <p>{newsItem.title}</p>
-        </div>
+        <NewsCard key={newsItem.publishedAt + newsItem.title} item={newsItem} />
       );
     });
   }
 
   render() {
+    if (!this.props.news) {
+      return <Spinner />;
+    }
+
     return (
-      <div className="container news-list">
-        <div className="row">
-          <div className="col">
+      <div className='container news-list'>
+        <div className='row'>
+          <div className='col'>
             <h1>News List</h1>
-            {this.renderList()}
+            <div className='row'>{this.renderList()}</div>
           </div>
         </div>
       </div>
@@ -32,9 +37,7 @@ class NewsList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    news: Object.values(state.news),
-  };
+  return { news: state.news.newsList };
 };
 
 export default connect(mapStateToProps, { fetchNews })(NewsList);
