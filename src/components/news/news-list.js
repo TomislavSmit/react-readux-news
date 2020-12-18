@@ -24,12 +24,10 @@ class NewsList extends React.Component {
     }
 
     return (
-      <div className='container news-list'>
-        <div className='row'>
-          <div className='col'>
-            <h1>News List</h1>
-            <div className='row'>{this.renderList()}</div>
-          </div>
+      <div className='row'>
+        <div className='col'>
+          <h1>News List</h1>
+          <div className='row'>{this.renderList()}</div>
         </div>
       </div>
     );

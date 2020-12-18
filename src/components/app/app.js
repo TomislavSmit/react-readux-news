@@ -8,7 +8,7 @@ function App() {
     <Router>
       <div>
         <Header />
-        <main className='mt-4'>
+        <main className='mt-4 container'>
           <AppRouter />
         </main>
       </div>

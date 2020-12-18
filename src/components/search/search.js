@@ -1,13 +1,27 @@
-const Search = () => {
-  return (
-    <div className="container news-list">
-      <div className="row">
-        <div className="col">
-          <h1>Search</h1>
-        </div>
-      </div>
-    </div>
-  );
-};
+import React from 'react';
+import { connect } from 'react-redux';
+import { searchNews } from '../../actions';
+import NewsList from '../news/news-list';
+import SearchBar from './search-bar';
 
-export default Search;
+class Search extends React.Component {
+  searchNewsHandler = (term) => {
+    this.props.searchNews(term);
+  };
+
+  render() {
+    return (
+      <div className='container news-list'>
+        <div className='row'>
+          <div className='col'>
+            <h1>Search</h1>
+          </div>
+        </div>
+        <SearchBar searchNewsHandler={this.searchNewsHandler} />
+        <NewsList />
+      </div>
+    );
+  }
+}
+
+export default connect(null, { searchNews })(Search);
