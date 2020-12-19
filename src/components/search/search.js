@@ -15,9 +15,9 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div className='container news-list'>
-        <div className='row'>
-          <div className='col'>
+      <div className='search'>
+        <div className='row my-3'>
+          <div class='col'>
             <h1>Search</h1>
           </div>
         </div>

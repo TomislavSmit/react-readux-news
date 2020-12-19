@@ -38,7 +38,8 @@ export const fetchNews = () => {
   };
 };
 
-export const fetchNewsByCategory = (category) => {
+export const fetchNewsByCategory = (category, pageSize = 5) => {
+  console.log('pageSize: ', pageSize);
   return async (dispatch, getState) => {
     try {
       if (!getState().news.country) {
@@ -48,7 +49,7 @@ export const fetchNewsByCategory = (category) => {
       const response = await newsapi.get(
         `/top-headlines?country=${
           getState().news.country
-        }&category=${category}&pageSize=5`
+        }&category=${category}&pageSize=${pageSize}`
       );
 
       dispatch({

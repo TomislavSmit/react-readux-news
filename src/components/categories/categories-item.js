@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { capitalize } from 'lodash';
 import { fetchNewsByCategory, selectNewsItem } from '../../actions';
-import Spinner from '../common/Spinner';
+
+import Spinner from '../common/spinner';
 
 class CategoriesItem extends React.Component {
   componentDidMount() {
@@ -32,12 +34,6 @@ class CategoriesItem extends React.Component {
     });
   }
 
-  categoryTitle() {
-    return (
-      this.props.category.charAt(0).toUpperCase() + this.props.category.slice(1)
-    );
-  }
-
   render() {
     if (!this.props.categoryNews) {
       return <Spinner />;
@@ -46,8 +42,10 @@ class CategoriesItem extends React.Component {
     }
 
     return (
-      <div>
-        <h4>{this.categoryTitle()}</h4>
+      <div className='categories-item'>
+        <Link to={`/categories/${this.props.category}`}>
+          <h4>{capitalize(this.props.category)}</h4>
+        </Link>
         <div
           id={`carouselExampleControls-${this.props.category}`}
           className='carousel slide'

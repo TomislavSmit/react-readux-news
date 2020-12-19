@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchNews } from '../../actions';
 
-import Spinner from '../common/Spinner';
+import Spinner from '../common/spinner';
 import NewsCard from './news-card';
 
 class NewsList extends React.Component {
@@ -22,7 +22,7 @@ class NewsList extends React.Component {
     return (
       <div className='row my-3'>
         <div className='col text-center'>
-          <h5>An error occured loading news</h5>
+          <h5>Sorry, no results</h5>
         </div>
       </div>
     );
@@ -36,11 +36,13 @@ class NewsList extends React.Component {
     }
 
     return (
-      <div className='row'>
-        <div className='col'>
-          <h1>News List</h1>
-          <div className='row'>{this.renderList()}</div>
+      <div className='news-list'>
+        <div className='row my-3'>
+          <div class='col'>
+            <h1>News List</h1>
+          </div>
         </div>
+        <div className='row'>{this.renderList()}</div>
       </div>
     );
   }

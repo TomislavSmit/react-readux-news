@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCategories } from '../../actions';
-import Spinner from '../common/Spinner';
+
+import Spinner from '../common/spinner';
 import CategoriesItem from './categories-item';
 
 class Categories extends React.Component {
@@ -21,13 +22,13 @@ class Categories extends React.Component {
     }
 
     return (
-      <div className='container news-list'>
-        <div className='row'>
-          <div className='col'>
+      <div className='categories-list'>
+        <div className='row my-3'>
+          <div class='col'>
             <h1>Categories</h1>
-            {this.renderCategories()}
           </div>
         </div>
+        {this.renderCategories()}
       </div>
     );
   }
