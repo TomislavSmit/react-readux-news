@@ -39,7 +39,6 @@ export const fetchNews = () => {
 };
 
 export const fetchNewsByCategory = (category, pageSize = 5) => {
-  console.log('pageSize: ', pageSize);
   return async (dispatch, getState) => {
     try {
       if (!getState().news.country) {
