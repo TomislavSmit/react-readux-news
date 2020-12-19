@@ -5,58 +5,69 @@ import {
   SELECT_NEWS_ITEM,
   SELECT_COUNTRY,
   FETCH_CATEGORIES,
+  SET_SEARCH_TERM,
 } from './types';
 
-export const fetchNews = (term) => {
+export const fetchNews = () => {
   return async (dispatch, getState) => {
     if (!getState().news.country) {
-      await dispatch({
-        type: SELECT_COUNTRY,
-        payload: 'GB',
-      });
+      await dispatch(selectCountry('GB'));
     }
 
-    const q = term ? term : '';
+    const q = getState().news.term ? getState().news.term : '';
 
     try {
       const response = await newsapi.get(
-        `/top-headlines?country=${
-          getState().news.country
-        }&q=${q}&category=business`
+        `/top-headlines?country=${getState().news.country}&q=${q}`
       );
-
-      if (!response) {
-        throw new Error('Error fetching news');
-      }
 
       dispatch({
         type: FETCH_NEWS,
         payload: response,
       });
     } catch (error) {
-      console.log(error);
+      await dispatch({
+        type: FETCH_NEWS,
+        payload: {
+          data: {
+            articles: [],
+          },
+        },
+      });
     }
   };
 };
 
 export const fetchNewsByCategory = (category) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
-      const response = await newsapi.get(
-        `/top-headlines?category=${category}&pageSize=5`
-      );
+      if (!getState().news.country) {
+        await dispatch(selectCountry('GB'));
+      }
 
-      const payload = {
-        category: category,
-        data: response,
-      };
+      const response = await newsapi.get(
+        `/top-headlines?country=${
+          getState().news.country
+        }&category=${category}&pageSize=5`
+      );
 
       dispatch({
         type: FETCH_NEWS_BY_CATEGORY,
-        payload: payload,
+        payload: {
+          category: category,
+          data: response.data,
+        },
       });
     } catch (error) {
-      console.log(error);
+      await dispatch({
+        type: FETCH_NEWS_BY_CATEGORY,
+        payload: {
+          category: category,
+          data: {
+            articles: [],
+          },
+        },
+      });
     }
   };
 };
@@ -70,7 +81,7 @@ export const selectNewsItem = (newsItem) => {
 
 export const selectCountry = (country) => {
   return async (dispatch) => {
-    dispatch({
+    await dispatch({
       type: SELECT_COUNTRY,
       payload: country,
     });
@@ -79,9 +90,20 @@ export const selectCountry = (country) => {
   };
 };
 
+export const setSearchTerm = (term) => {
+  return async (dispatch) => {
+    await dispatch({
+      type: SET_SEARCH_TERM,
+      payload: term,
+    });
+  };
+};
+
 export const searchNews = (term) => {
   return async (dispatch) => {
-    dispatch(fetchNews(term));
+    await dispatch(setSearchTerm(term));
+
+    dispatch(fetchNews());
   };
 };
 

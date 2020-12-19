@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectCountry } from '../../actions';
 
@@ -47,9 +47,10 @@ class Header extends React.Component {
           <div>
             <button
               type='button'
+              disabled={this.props.location.pathname === '/news-detail'}
               className={
                 'btn d-inline-block p-3 ' +
-                (this.props.country === 'GB' && 'bg-primary text-white')
+                (this.props.country === 'GB' && 'bg-primary text-white active')
               }
               onClick={() => this.selectCountryHandler('GB')}
             >
@@ -57,9 +58,10 @@ class Header extends React.Component {
             </button>
             <button
               type='button'
+              disabled={this.props.location.pathname === '/news-detail'}
               className={
                 'btn d-inline-block p-3 ' +
-                (this.props.country === 'US' && 'bg-primary text-white')
+                (this.props.country === 'US' && 'bg-primary text-white active')
               }
               onClick={() => this.selectCountryHandler('US')}
             >
@@ -78,4 +80,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { selectCountry })(Header);
+export default connect(mapStateToProps, { selectCountry })(withRouter(Header));

@@ -18,9 +18,21 @@ class NewsList extends React.Component {
     });
   }
 
+  renderError() {
+    return (
+      <div className='row my-3'>
+        <div className='col text-center'>
+          <h5>An error occured loading news</h5>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     if (!this.props.news) {
       return <Spinner />;
+    } else if (this.props.news.length < 1) {
+      return this.renderError();
     }
 
     return (

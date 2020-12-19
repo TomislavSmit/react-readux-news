@@ -4,6 +4,7 @@ import {
   SELECT_NEWS_ITEM,
   SELECT_COUNTRY,
   FETCH_CATEGORIES,
+  SET_SEARCH_TERM,
 } from '../actions/types';
 
 const newsReducer = (state = {}, action) => {
@@ -15,12 +16,14 @@ const newsReducer = (state = {}, action) => {
     case FETCH_NEWS_BY_CATEGORY:
       return {
         ...state,
-        [action.payload.category]: action.payload.data.data.articles,
+        [action.payload.category]: action.payload.data.articles,
       };
     case SELECT_NEWS_ITEM:
       return { ...state, selectedNewsItem: action.payload };
     case SELECT_COUNTRY:
       return { ...state, country: action.payload };
+    case SET_SEARCH_TERM:
+      return { ...state, term: action.payload };
     default:
       return state;
   }

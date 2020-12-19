@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchNewsByCategory } from '../../actions';
+import { Link } from 'react-router-dom';
+import { fetchNewsByCategory, selectNewsItem } from '../../actions';
 import Spinner from '../common/Spinner';
 
 class CategoriesItem extends React.Component {
@@ -15,12 +16,17 @@ class CategoriesItem extends React.Component {
           className={'carousel-item ' + (index === 0 && 'active')}
           key={index + newsItem.publishedAt + newsItem.title}
         >
-          <h5>{newsItem.title}</h5>
-          <img
-            className='d-block w-100'
-            src={newsItem.urlToImage}
-            alt='First slide'
-          />
+          <Link
+            to={`/news-detail`}
+            onClick={() => this.props.selectNewsItem(newsItem)}
+          >
+            <h5>{newsItem.title}</h5>
+            <img
+              className='d-block w-100'
+              src={newsItem.urlToImage}
+              alt='First slide'
+            />
+          </Link>
         </div>
       );
     });
@@ -32,9 +38,21 @@ class CategoriesItem extends React.Component {
     );
   }
 
+  renderError() {
+    return (
+      <div className='row my-3'>
+        <div className='col text-center'>
+          <h5>An error occured loading this category news</h5>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     if (!this.props.categoryNews) {
       return <Spinner />;
+    } else if (this.props.categoryNews.length < 1) {
+      return this.renderError();
     }
 
     return (
@@ -84,6 +102,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchNewsByCategory })(
-  CategoriesItem
-);
+export default connect(mapStateToProps, {
+  fetchNewsByCategory,
+  selectNewsItem,
+})(CategoriesItem);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { searchNews } from '../../actions';
+import { searchNews, setSearchTerm } from '../../actions';
 import NewsList from '../news/news-list';
 import SearchBar from './search-bar';
 
@@ -8,6 +8,10 @@ class Search extends React.Component {
   searchNewsHandler = (term) => {
     this.props.searchNews(term);
   };
+
+  componentWillUnmount() {
+    this.props.setSearchTerm('');
+  }
 
   render() {
     return (
@@ -24,4 +28,4 @@ class Search extends React.Component {
   }
 }
 
-export default connect(null, { searchNews })(Search);
+export default connect(null, { searchNews, setSearchTerm })(Search);
