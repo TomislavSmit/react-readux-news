@@ -38,21 +38,11 @@ class CategoriesItem extends React.Component {
     );
   }
 
-  renderError() {
-    return (
-      <div className='row my-3'>
-        <div className='col text-center'>
-          <h5>An error occured loading this category news</h5>
-        </div>
-      </div>
-    );
-  }
-
   render() {
     if (!this.props.categoryNews) {
       return <Spinner />;
     } else if (this.props.categoryNews.length < 1) {
-      return this.renderError();
+      return null;
     }
 
     return (
