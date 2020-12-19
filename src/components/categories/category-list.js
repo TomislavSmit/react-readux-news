@@ -32,19 +32,15 @@ class CategoryList extends React.Component {
 
     return (
       <div className='category-list'>
-        <div className='row'>
-          <div className='col'>
-            <div className='row my-3'>
-              <div class='col'>
-                <h1>
-                  Top {capitalize(this.props.match.params.category)} news from{' '}
-                  {this.props.news.country}
-                </h1>
-              </div>
-            </div>
-            <div className='row'>{this.renderNewsByCategory()}</div>
+        <div className='row my-3'>
+          <div class='col'>
+            <h1>
+              Top {capitalize(this.props.match.params.category)} news from{' '}
+              {this.props.news.country}
+            </h1>
           </div>
         </div>
+        <div className='row'>{this.renderNewsByCategory()}</div>
       </div>
     );
   }

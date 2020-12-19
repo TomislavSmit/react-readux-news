@@ -25,7 +25,7 @@ class Categories extends React.Component {
       <div className='categories-list'>
         <div className='row my-3'>
           <div class='col'>
-            <h1>Categories</h1>
+            <h1>Top 5 news from {this.props.country}</h1>
           </div>
         </div>
         {this.renderCategories()}
@@ -37,6 +37,7 @@ class Categories extends React.Component {
 const mapStateToProps = (state) => {
   return {
     categories: state.news.categories,
+    country: state.news.country,
   };
 };
 
