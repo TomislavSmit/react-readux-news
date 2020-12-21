@@ -38,7 +38,7 @@ class NewsList extends React.Component {
     return (
       <div className='news-list'>
         <div className='row my-3'>
-          <div class='col'>
+          <div className='col'>
             <h1>News List</h1>
           </div>
         </div>

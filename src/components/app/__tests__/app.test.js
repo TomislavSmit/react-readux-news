@@ -5,7 +5,14 @@ import Header from '../../header/header';
 import AppRouter from '../../../routes';
 
 describe('App', () => {
-  const wrapper = shallow(<App />);
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(<App />);
+  });
+
+  afterEach(() => {
+    wrapper.unmount();
+  });
 
   it('renders Header component', () => {
     expect(wrapper.find(Header).exists()).toBe(true);

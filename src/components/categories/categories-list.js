@@ -24,7 +24,7 @@ class Categories extends React.Component {
     return (
       <div className='categories-list'>
         <div className='row my-3'>
-          <div class='col'>
+          <div className='col'>
             <h1>Top 5 news from {this.props.country}</h1>
           </div>
         </div>
