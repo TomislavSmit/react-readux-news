@@ -9,7 +9,9 @@ describe('App', () => {
 
   it('renders Header component', () => {
     expect(wrapper.find(Header).exists()).toBe(true);
+  });
 
+  it('renders AppRouter component', () => {
     expect(wrapper.find(AppRouter).exists()).toBe(true);
   });
 });
